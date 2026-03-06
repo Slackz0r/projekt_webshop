@@ -1,24 +1,40 @@
-import type { ProductsResponse } from "./types";
+import { Suspense } from "react";
+import { getProducts, getProduct } from "@/utils/fetchUtils";
+import type { ProductsResponse, Category } from "./types";
+import ProductList from "@/components/product-list";
+import SearchBar from "@/components/search-bar";
 
-const API_URL = "http://localhost:4000";
-const defaultLimit = "6";
+type SearchParams = {
+  id?: string;
+  q?: string;
+  page?: string;
+  categoryId?: string;
+};
 
-export default async function Home() {
-  // we use the fetch() method to get the products from the API
-  // in this fetch we sort using _sort and _order and we limit the number of products using _limit
-  // we also use _expand to get the relational category data
-  // we can use the other destructed variables like page, total and so on to create pagination or show info
-  const { products, total, page, pages, limit }: ProductsResponse = await fetch(
-    `${API_URL}/products/?_limit=${defaultLimit}&_sort=id&_order=desc&_expand=category`,
-  ).then((res) => res.json());
+export default async function Home(props: { searchParams?: Promise<SearchParams> }) {
+  const searchParams = await props.searchParams;
+  const query = searchParams?.q || "";
+  const categoryId = searchParams?.categoryId || "";
+  const currentPage = Number(searchParams?.page) || 1;
 
+  console.log(query);
+  const { products, total, page, pages, limit }: ProductsResponse = await getProducts(
+    "/products",
+    query,
+    categoryId,
+  );
 
-console.log(products);
+  const categories: Category[] = await getProducts("/categories");
 
   return (
     <main>
       <h1>Products</h1>
-      <div>{products.map((product) => <h2 key={product.id}>{product.title} - {product.category?.name}</h2>)}</div>
+      <div>
+        <SearchBar categories={categories} />
+        <Suspense fallback={<p>Loading...</p>}>
+          <ProductList products={products} />
+        </Suspense>
+      </div>
     </main>
   );
 }
