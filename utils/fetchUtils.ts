@@ -22,6 +22,7 @@ export const getProducts = async (endpoint: string, q?: string, categoryId?: str
   return data;
 };
 
+// Get single product
 export const getProduct = async (id: string) => {
   const response = await fetch(`${API_URL}/products/${id}`);
   if (!response.ok) {

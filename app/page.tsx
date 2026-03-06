@@ -1,8 +1,9 @@
 import { Suspense } from "react";
-import { getProducts, getProduct } from "@/utils/fetchUtils";
+import { getProducts } from "@/utils/fetchUtils";
 import type { ProductsResponse, Category } from "./types";
 import ProductList from "@/components/product-list";
 import SearchBar from "@/components/search-bar";
+import StockCounters from "@/components/stock-counters";
 
 type SearchParams = {
   id?: string;
@@ -18,21 +19,20 @@ export default async function Home(props: { searchParams?: Promise<SearchParams>
   const currentPage = Number(searchParams?.page) || 1;
 
   console.log(query);
-  const { products, total, page, pages, limit }: ProductsResponse = await getProducts(
-    "/products",
-    query,
-    categoryId,
-  );
+  const data: ProductsResponse = await getProducts("/products", query, categoryId);
 
   const categories: Category[] = await getProducts("/categories");
+
+  console.log(data);
 
   return (
     <main>
       <h1>Products</h1>
       <div>
+        <StockCounters data={data}></StockCounters>
         <SearchBar categories={categories} />
         <Suspense fallback={<p>Loading...</p>}>
-          <ProductList products={products} />
+          <ProductList products={data.products} />
         </Suspense>
       </div>
     </main>
