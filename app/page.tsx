@@ -27,7 +27,6 @@ export default async function Home(props: { searchParams?: Promise<SearchParams>
 
   return (
     <main>
-      <h1>Products</h1>
       <div>
         <StockCounters data={data}></StockCounters>
         <SearchBar categories={categories} />
