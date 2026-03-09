@@ -31,6 +31,7 @@ export default function SearchBar({ categories }: { categories: Category[] }) {
         }}
         defaultValue=""
       />
+
       <select
         name="category"
         id="category"
