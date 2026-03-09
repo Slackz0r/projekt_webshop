@@ -28,7 +28,7 @@ export default async function Home(props: { searchParams?: Promise<SearchParams>
   return (
     <main>
       <div>
-        <StockCounters data={data}></StockCounters>
+        <StockCounters data={data} />
         <SearchBar categories={categories} />
         <Suspense fallback={<p>Loading...</p>}>
           <ProductList products={data.products} />

@@ -1,5 +1,5 @@
 import { ProductsResponse } from "@/app/types";
-import CounterCard from "./counter-card";
+import CounterCard, { CounterCardType } from "./counter-card";
 
 export default function StockCounters({ data }: { data: ProductsResponse }) {
   const { products, total, limit, page, pages } = data;
@@ -21,7 +21,7 @@ export default function StockCounters({ data }: { data: ProductsResponse }) {
     }
   });
 
-  const stockData = [
+  const stockData: { type: CounterCardType; amount: number }[] = [
     {
       type: "Total",
       amount: totalStock,
@@ -41,7 +41,7 @@ export default function StockCounters({ data }: { data: ProductsResponse }) {
   ];
 
   return (
-    <section className="flex">
+    <section className="grid grid-cols-4 gap-6 w-full">
       {stockData.map(({ type, amount }) => (
         <CounterCard key={type} type={type} amount={amount} />
       ))}
