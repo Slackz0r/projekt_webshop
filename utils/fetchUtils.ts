@@ -23,8 +23,8 @@ export const getProducts = async (endpoint: string, q?: string, categoryId?: str
 };
 
 // Get single product
-export const getProduct = async (id: string) => {
-  const response = await fetch(`${API_URL}/products/${id}`);
+export const getProduct = async (endpoint: string, id: string) => {
+  const response = await fetch(`${API_URL}${endpoint}/${id}`);
   if (!response.ok) {
     return "Unable to get product";
   }
