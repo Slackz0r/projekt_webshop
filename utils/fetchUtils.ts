@@ -4,15 +4,28 @@ const API_URL = "http://localhost:4000";
 const defaultLimit = "6";
 
 // Get all products
-export const getProducts = async (endpoint: string, q?: string, categoryId?: string) => {
+export const getData = async (
+  endpoint: string,
+  q?: string,
+  categoryId?: string,
+  limit?: string,
+  page?: string,
+) => {
+  // Initialize params
   const params = new URLSearchParams();
+
+  // Set params
   if (q) {
     params.set("q", q);
   }
   if (categoryId) {
     params.set("categoryId", categoryId);
   }
+  if (limit) {
+    params.set("_limit", limit);
+  }
 
+  // Fetch
   const response = await fetch(`${API_URL}${endpoint}?${params.toString()}`);
   if (!response.ok) {
     return "Error, unable to get products";

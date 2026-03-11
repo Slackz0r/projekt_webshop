@@ -4,8 +4,6 @@ import CounterCard, { CounterCardType } from "./counter-card";
 export default function StockCounters({ data }: { data: ProductsResponse }) {
   const { products, total, limit, page, pages } = data;
 
-  console.log(products);
-
   const totalStock = total;
   let inStock = 0;
   let lowStock = 0;
@@ -41,7 +39,7 @@ export default function StockCounters({ data }: { data: ProductsResponse }) {
   ];
 
   return (
-    <section className="grid grid-cols-4 gap-6 w-full">
+    <section className="flex gap-6 w-full">
       {stockData.map(({ type, amount }) => (
         <CounterCard key={type} type={type} amount={amount} />
       ))}
