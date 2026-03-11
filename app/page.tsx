@@ -4,6 +4,7 @@ import type { ProductsResponse, Category } from "./types";
 import ProductList from "@/components/product-list";
 import SearchBar from "@/components/search-bar";
 import StockCounters from "@/components/stock-counters";
+import Dashboard from "@/components/dashboard";
 
 type SearchParams = {
   id?: string;
@@ -26,7 +27,8 @@ export default async function Home(props: { searchParams?: Promise<SearchParams>
   console.log(data);
 
   return (
-    <main>
+    <main className="flex h-screen">
+      <Dashboard />
       <div>
         <StockCounters data={data} />
         <SearchBar categories={categories} />
