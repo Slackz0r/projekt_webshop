@@ -4,7 +4,6 @@ import type { Category } from "@/app/types";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 export default function SearchBar({ categories }: { categories: Category[] }) {
-  console.log(categories);
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();

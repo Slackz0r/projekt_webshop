@@ -21,7 +21,14 @@ export default async function Home(props: { searchParams?: Promise<SearchParams>
 
   const data: ProductsResponse = await getData("/products", query, categoryId);
 
-  // const categories = ??
+  const categories = [
+    ...new Map(
+      data.products
+        .map((product) => product.category)
+        .filter((category): category is Category => category !== undefined)
+        .map((category) => [category.id, category]),
+    ).values(),
+  ];
 
   return (
     <main className="flex h-screen w-full">
