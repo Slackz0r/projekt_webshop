@@ -4,7 +4,7 @@ const API_URL = "http://localhost:4000";
 const defaultLimit = "6";
 
 // Get all products
-export const getData = async (
+export const getProducts = async (
   endpoint: string,
   q?: string,
   categoryId?: string,
@@ -41,6 +41,17 @@ export const getProduct = async (endpoint: string, id: string) => {
   const response = await fetch(`${API_URL}${endpoint}/${id}`);
   if (!response.ok) {
     return "Unable to get product";
+  }
+
+  const data = await response.json();
+  return data;
+};
+
+//Get all categories
+export const getCategories = async (endpoint: string) => {
+  const response = await fetch(`${API_URL}${endpoint}`);
+  if (!response.ok) {
+    return "Unable to get categories";
   }
 
   const data = await response.json();
