@@ -24,6 +24,7 @@ export const getData = async (
   if (limit) {
     params.set("_limit", limit);
   }
+  params.set("_expand", "category");
 
   // Fetch
   const response = await fetch(`${API_URL}${endpoint}?${params.toString()}`);

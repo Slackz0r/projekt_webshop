@@ -19,10 +19,16 @@ export default async function Home(props: { searchParams?: Promise<SearchParams>
   const categoryId = searchParams?.categoryId || "";
   const currentPage = Number(searchParams?.page) || 1;
 
-  console.log(query);
-  const data: ProductsResponse = await getData("/products", query, categoryId, "6");
+  const data: ProductsResponse = await getData("/products", query, categoryId);
 
-  const categories: Category[] = await getData("/categories");
+  const categories = [
+    ...new Map(
+      data.products
+        .map((product) => product.category)
+        .filter((category): category is Category => category !== undefined)
+        .map((category) => [category.id, category]),
+    ).values(),
+  ];
 
   return (
     <main className="flex h-screen w-full">
@@ -31,7 +37,7 @@ export default async function Home(props: { searchParams?: Promise<SearchParams>
         <StockCounters data={data} />
         <SearchBar categories={categories} />
         <Suspense fallback={<p>Loading...</p>}>
-          <ProductList products={data.products} categories={categories} />
+          <ProductList products={data.products} />
         </Suspense>
       </div>
     </main>
