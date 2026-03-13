@@ -1,105 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Webshop 🛍️
 
-This project uses [json-server](https://github.com/typicode/json-server/tree/v0.17.4) to mock a backend API.
+![Next.js](https://img.shields.io/badge/Next.js-black?logo=next.js)
+![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+![Tailwind](https://img.shields.io/badge/Tailwind-06B6D4?logo=tailwindcss&logoColor=white)
+![JSON Server](https://img.shields.io/badge/JSON--server-green)
+![Status](https://img.shields.io/badge/status-work%20in%20progress-orange)
 
-Data in the json for the server is from [dummyjson.com](https://dummyjson.com/docs/products) but modified to fit the needs of this project. Most of the endpoints mirrors those in that documentation.
+This is a school project where I built an admin interface for a webshop using primarily **Next.js**, **React** and **TypeScript**.
 
-## Getting Started
+The main purpose of this project was for me to get a better understanding of **searchParams**, the difference between **server/client components**, **CRUD operations**, and the connection between **database** and **frontend visualization/interactivity**.
 
-First, install the dependencies:
+My primary focus has been getting the features in place and working correctly rather than spending too much time making something visually stunning. In my opinion, that's the easy part, which I decided to save — apart from the absolute basic layout — for last. Mostly due to the limited time given for this project.
+
+This is still very much a work in progress, but I'm learning a lot along the way and getting a deeper understanding of how to work with the URL, as well as architecture and the component tree.
+
+## Demo 🎬
+
+This project is not yet deployed to Vercel due to a couple of unfinished features that need to be fixed before I can successfully deploy.
+
+## Install ⚙️
+
+If you want to run this project locally, you can run the following commands in your terminal:
 
 ```bash
+git clone https://github.com/Slackz0r/projekt_webshop.git
+cd projekt_webshop
 npm install
-# or
-yarn install
-# or
-pnpm install
-# or
-bun install
-```
-
-To start the full development environment (Next.js frontend + JSON Server backend), use:
-
-```bash
 npm run dev:full
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+_This will install and run both the project and the data server._
 
-The JSON server is running on [http://localhost:4000](http://localhost:4000). Here you can see the API endpoints and test them.
+## Features ✨
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- View all available products
 
-## JSON Server Setup
+- Database search with URLSearchParams
 
-This project uses [json-server](https://github.com/typicode/json-server/tree/v0.17.4) to mock a backend API.
+- Filter on either category or text content
 
-### Configuration
+- Real-time stock status for products
 
-The server configuration files are located in the `server/` directory:
+- Edit/Delete/Add product (in progress)
 
--   `server/products.json`: The database file containing the product data.
--   `server/middleware.js`: Custom middleware for the server.
+## Tech stack 🧰
 
-### Scripts
+- Next.js
 
-The following scripts are available in `package.json`:
+- React
 
--   `npm run mock-server`: Starts the json-server on port 4000.
--   `npm run dev:full`: Runs both the Next.js development server and the json-server concurrently.
+- TypeScript
 
-## API Endpoints
+- Tailwind
 
-The mock server (running on port 4000) provides the following endpoints:
+- JSON-server
 
-### Resources
-- `GET /products`: Get all products
-- `GET /products/:id`: Get a single product by ID
-- `GET /categories`: Get all categories
-- `GET /categories/:id`: Get a category by ID
-- `GET /categories?slug=:slug`: Get a category by slug
+<details> <summary><strong>Reasoning 💭</strong></summary>
 
-### Create Product
-- `POST /products`: Create a new product
+<br>
 
-**Required Fields:**
-- `title`: String
-- `price`: Number
-- `description`: String
-- `thumbnail`: URL String
-- `categoryId`: Number (ID of an existing category)
-- `brand`: String
+**Frameworks:**
+I'm a frontend developer yearning to become fullstack, so React/Next.js was the obvious choice for this project. It's used by many companies and is a great way of learning how to build fullstack applications.
 
-**Auto-generated Fields:**
-- `id`: Sequential ID
-- `sku`: Generated SKU (format: CAT-BRA-TIT-ID)
-- `meta`: Creation and update timestamps
+**Styling:**
+I have previously preferred to write my CSS from scratch using "vanilla" CSS, CSS Modules or SASS. I like to think architecture, come up with thought-out solutions and be in control of how things are structured. Partly for learning purposes and partly because then I can structure things how I want for a better overview. This time, however, I chose Tailwind to get more accustomed to working with those types of libraries and also because of the amount of time and effort it takes to write clean and well thought-out CSS.
 
-### Pagination & Sorting (json-server 0.17.4)
-See [json-server documentation](https://github.com/typicode/json-server/tree/v0.17.4) for more information.
+**Database:**
+My initial thought on the database was to use Supabase with Prisma. However, after some initial research along with a fair bit of trial and error, I came to the conclusion that JSON Server with properly set mock data would be enough for now. Since my purpose with this project was not to set up a database, but rather to work with searchParams, server/client components and interactivity/dynamic functionality, I figured that JSON Server had all the features needed for the purpose of this project.
 
-#### Pagination
-Use `_page` and `_limit` to paginate data:
-- `GET /products?_page=1&_limit=10` (First page, 10 items)
-- `GET /products?_page=2&_limit=10` (Second page, 10 items)
+</details>
 
-The response will include the `Link` header with `first`, `prev`, `next`, and `last` links.
-Our custom middleware also adds `X-Total-Count` header and wraps the response to include pagination metadata (total, limit, page, pages).
+## What's next? 🚀
 
-#### Sorting
-Use `_sort` and `_order` to sort data:
-- `GET /products?_sort=price&_order=asc` (Sort by price, ascending)
-- `GET /products?_sort=price&_order=desc` (Sort by price, descending)
-- `GET /products?_sort=price,title&_order=desc,asc` (Sort by multiple fields)
+- Finish Edit/Delete/Add product functionality
 
-#### Filtering
-- `GET /products?price_gte=10&price_lte=50` (Price between 10 and 50)
-- `GET /products?q=mascara` (Full-text search)
+- Pagination for product list
 
-## Learn More
+- SVGs for different product categories
 
-To learn more about Next.js, take a look at the following resources:
+- Improved styling
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Deployment
 
+## Future development 🔮
+
+- Replace JSON Server with Supabase
+
+- Customer interface
+
+- Login and authentication
+
+## Author 👤
+
+_Gustav Aldenberg_ aka _Slackz0r_

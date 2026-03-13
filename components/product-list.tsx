@@ -1,4 +1,5 @@
 import { Product } from "@/app/types";
+import { SquarePen, Trash2 } from "lucide-react";
 
 export default function ProductList({ products }: { products: Product[] }) {
   return (
@@ -26,6 +27,16 @@ export default function ProductList({ products }: { products: Product[] }) {
             <td>{price}</td>
             <td>{stock}</td>
             <td>{availabilityStatus}</td>
+            <td>
+              <button type="button" className="cursor-pointer">
+                <SquarePen />
+              </button>
+            </td>
+            <td>
+              <button type="button" className="cursor-pointer">
+                <Trash2 />
+              </button>
+            </td>
           </tr>
         ))}
       </tbody>
