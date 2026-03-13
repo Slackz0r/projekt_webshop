@@ -11,7 +11,7 @@ This is a school project where I built an admin interface for a webshop using pr
 
 The main purpose of this project was for me to get a better understanding of **searchParams**, the difference between **server/client components**, **CRUD operations**, and the connection between **database** and **frontend visualization/interactivity**.
 
-My primary focus has been getting the features in place and working correctly rather than spending too much time making something visually stunning. In my opinion, that's the easy part, which I decided to save — apart from the absolute basic layout — for last. Mostly due to the limited time given for this project.
+My primary focus has been getting the features in place and working correctly rather than spending too much time making something visually stunning. Hence why I made the decision to save the styling — apart from the absolute basic layout — for last. Mostly due to the limited time given for this project.
 
 This is still very much a work in progress, but I'm learning a lot along the way and getting a deeper understanding of how to work with the URL, as well as architecture and the component tree.
 
